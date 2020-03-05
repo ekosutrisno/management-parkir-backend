@@ -1,4 +1,5 @@
 # Management Parkir API
+
 Latihan Membuat sistem management Parkir, Dari data mobil, set Slot parkir masih tersedia atau tidak dan Menentukan jumlah pembayaran ketika keluar.
 
 ---
@@ -7,14 +8,13 @@ Latihan Membuat sistem management Parkir, Dari data mobil, set Slot parkir masih
 
 > If your `README` has a lot of info, section headers might be nice.
 
-- [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
-
+-  [Installation](#installation)
+-  [Features](#features)
+-  [Contributing](#contributing)
+-  [Team](#team)
+-  [FAQ](#faq)
+-  [Support](#support)
+-  [License](#license)
 
 ---
 
@@ -35,31 +35,31 @@ Latihan Membuat sistem management Parkir, Dari data mobil, set Slot parkir masih
 
 **Environmet Sederhana**
 
-- Port :8088
+-  Port :8088
 
-- URL Kendaraan : http://localhost:8088/api/kendaraan/?
+-  URL Kendaraan : http://localhost:8088/api/kendaraan/?
 
-- URL Parkir : http://localhost:8088/api/parkir/?
+-  URL Parkir : http://localhost:8088/api/parkir/?
 
-- Most people will glance at your `README`, *maybe* star it, and leave
+-  Most people will glance at your `README`, _maybe_ star it, and leave
 
 ---
 
 ## Example (Optional)
 
-```javascript
+```java
 // code away!
-
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
+  @GetMapping("warnaArray")
+  public ResponseEntity<?> getArrayPlat(@RequestParam("warna") String warna) {
+    Map<String, String[]> data = kendaraanService.getResponseByWarnaArray(warna);
+    return new ResponseEntity<>(data, HttpStatus.OK);
   }
 };
 ```
+
 ---
 
 Note : semua perintah dan keterangan dapat dilihat di resource => Request.http
 
-Thanks from: 
+Thanks from:
 Eko Sutrisno
