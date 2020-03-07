@@ -6,15 +6,15 @@
 GET {{kendaraan_url}}/all HTTP/1.1
 
 ### Get Kendaraan By Id (Optional)
-GET {{kendaraan_url}}/4 HTTP/1.1
+GET {{kendaraan_url}}/3 HTTP/1.1
 
 ### Get View Response Kendraan
 GET {{kendaraan_url}}/response HTTP/1.1
 
 #Propertu Tambahan
-@nomor_plat=B 113 QW
+@nomor_plat=B 111 QW
 @warna_mobil=hitam
-@tipe=mpv
+@tipe=suv
 
 ### Get Reponse By Plat Nomor
 GET {{kendaraan_url}}/plat?noPlat={{nomor_plat}} HTTP/1.1

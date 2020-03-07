@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = "api/kendaraan", produces = "application/json")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class KendaraanController {
 
   @Autowired
@@ -81,8 +81,7 @@ public class KendaraanController {
   }
 
   @PostMapping(value = "add")
-  public Kendaraan addKendaraan(@RequestBody KendaraanDto kendaraandDto) {
-    Kendaraan kendaraan = kendaraandDto.getKendaraan();
+  public Kendaraan addKendaraan(@RequestBody Kendaraan kendaraan) {
 
     Parkir parkir = parkirService.getById(kendaraan.getParkiLot().getId()).get();
     parkirService.updateMasuk(parkir);
