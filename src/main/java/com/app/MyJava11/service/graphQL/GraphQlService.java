@@ -26,7 +26,7 @@ import graphql.schema.idl.TypeDefinitionRegistry;
 @Service
 public class GraphQlService {
 
-  @Value("classpath:kendaraan.graphql")
+  @Value("classpath:kendaraan.graphqls")
   Resource resouce;
 
   private GraphQL graphQL;

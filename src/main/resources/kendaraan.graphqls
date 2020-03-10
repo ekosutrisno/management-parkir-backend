@@ -17,7 +17,7 @@ type Kendaraan {
    tanggal_masuk: String
    tanggal_keluar: String
    isKeluar: Boolean
-   parkirLot: [Parkir]
+   parkirLot: Parkir
 }
 
 type Parkir {
