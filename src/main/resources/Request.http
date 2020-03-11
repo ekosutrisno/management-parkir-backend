@@ -7,15 +7,15 @@
 GET {{kendaraan_url}}/all HTTP/1.1
 
 ### Get Kendaraan By Id (Optional)
-GET {{kendaraan_url}}/3 HTTP/1.1
+GET {{kendaraan_url}}/10 HTTP/1.1
 
 ### Get View Response Kendraan
 GET {{kendaraan_url}}/response HTTP/1.1
 
 #Propertu Tambahan
-@nomor_plat=B 111 QW
+@nomor_plat=B 118 bg
 @warna_mobil=hitam
-@tipe=suv
+@tipe=mpv
 
 ### Get Reponse By Plat Nomor
 GET {{kendaraan_url}}/plat?noPlat={{nomor_plat}} HTTP/1.1
@@ -43,12 +43,10 @@ POST {{kendaraan_url}}/add HTTP/1.1
 Content-Type: application/json
 
 {
-  "kendaraan":{
-    "tipe":"SUV",
-    "platNomor":"B 113 QW",
-    "warna":"Hitam",
-    "parkiLot":{"id":5 }
-  }
+    "tipe":"SEDAN",
+    "platNomor":"B 11Z QW",
+    "warna":"Putih",
+    "parkiLot":{"id":12 }
 }
 
 ### Get All data Parkir yang Available = true
@@ -67,7 +65,7 @@ Content-Type: text/plain
 
 query{
   getAllParkir{
-    nama
+    id
   }
 }
 
@@ -75,13 +73,10 @@ query{
 POST {{graphql_url}} HTTP/1.1
 
 query{
-getKendaraanById (id:5){
+getAllKendaraan{
   id
   tipe
   platNomor
-  tanggal_masuk
-  tanggal_keluar
-  warna
 }
 }
 

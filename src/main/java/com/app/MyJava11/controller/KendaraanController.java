@@ -1,6 +1,7 @@
 package com.app.MyJava11.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -112,8 +113,12 @@ public class KendaraanController {
   }
 
   @GetMapping("keluar")
-  public ResponseByPlatNomor kendaraanKeluar(@RequestParam("platNomor") String platNomor) {
-    return kendaraanService.keluar(platNomor);
+  public ResponseEntity<?> kendaraanKeluar(@RequestParam("platNomor") String platNomor) {
+
+    Map<String, Object> result = new HashMap<>();
+    ResponseByPlatNomor data = kendaraanService.keluar(platNomor);
+    result.put("result", data);
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
   @GetMapping("status")
