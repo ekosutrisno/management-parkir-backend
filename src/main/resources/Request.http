@@ -7,13 +7,13 @@
 GET {{kendaraan_url}}/all HTTP/1.1
 
 ### Get Kendaraan By Id (Optional)
-GET {{kendaraan_url}}/10 HTTP/1.1
+GET {{kendaraan_url}}/3 HTTP/1.1
 
 ### Get View Response Kendraan
 GET {{kendaraan_url}}/response HTTP/1.1
 
 #Propertu Tambahan
-@nomor_plat=B 118 bg
+@nomor_plat=b 1a1 qw
 @warna_mobil=hitam
 @tipe=mpv
 
@@ -66,6 +66,7 @@ Content-Type: text/plain
 query{
   getAllParkir{
     id
+    nomorPlat
   }
 }
 
@@ -74,7 +75,6 @@ POST {{graphql_url}} HTTP/1.1
 
 query{
 getAllKendaraan{
-  id
   tipe
   platNomor
 }
@@ -85,8 +85,6 @@ POST {{graphql_url}} HTTP/1.1
 
 query{
   getAllKendaraan{
-    id
-    tipe
     warna 
     isKeluar
   }

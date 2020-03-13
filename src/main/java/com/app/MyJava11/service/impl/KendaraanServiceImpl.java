@@ -48,8 +48,8 @@ public class KendaraanServiceImpl implements KendaraanService {
   }
 
   @Override
-  public Optional<Kendaraan> SearchByPlatNomor(String nomorPlat) {
-    return kendaraanRepository.findByPlatNomorIgnoreCase(nomorPlat);
+  public List<Kendaraan> SearchByPlatNomor(String nomorPlat) {
+    return kendaraanRepository.searchByPlat("%" + nomorPlat + "%");
   }
 
   @Override

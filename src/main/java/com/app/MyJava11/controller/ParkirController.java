@@ -40,7 +40,6 @@ public class ParkirController {
     if (newData.size() <= 0)
       return new ResponseEntity<>(pPenuh, HttpStatus.NOT_FOUND);
     return new ResponseEntity<>(newData, HttpStatus.OK);
-
   }
 
   @GetMapping("/{id}")

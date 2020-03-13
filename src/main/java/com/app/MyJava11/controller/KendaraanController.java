@@ -99,7 +99,7 @@ public class KendaraanController {
 
   @GetMapping("search")
   public ResponseEntity<?> gResponseByPlatNomor(@RequestParam("plat") String plat) {
-    Optional<Kendaraan> platNomor = kendaraanService.SearchByPlatNomor(plat);
+    List<Kendaraan> platNomor = kendaraanService.SearchByPlatNomor(plat);
 
     CustomResponse pPenuh = new CustomResponse();
     pPenuh.setStatus("Plat " + plat + " tidak ditemukan.");
@@ -107,8 +107,8 @@ public class KendaraanController {
     List<CustomResponse> data = new ArrayList<>();
     data.add(pPenuh);
 
-    if (platNomor.isPresent())
-      return new ResponseEntity<>(platNomor.get(), HttpStatus.OK);
+    if (platNomor.size() > 0)
+      return new ResponseEntity<>(platNomor, HttpStatus.OK);
     return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
   }
 

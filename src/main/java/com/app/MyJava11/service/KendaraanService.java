@@ -18,7 +18,7 @@ public interface KendaraanService {
 
   List<Response> getResponse();
 
-  Optional<Kendaraan> SearchByPlatNomor(String nomorPlat);
+  List<Kendaraan> SearchByPlatNomor(String nomorPlat);
 
   Optional<Response> getResponseByPlat(String platNomor);
 

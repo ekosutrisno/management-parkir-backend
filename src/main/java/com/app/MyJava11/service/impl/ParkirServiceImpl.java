@@ -20,7 +20,7 @@ public class ParkirServiceImpl implements ParkirService {
   @Override
   public List<Parkir> getAll() {
     List<Parkir> parkirs = new ArrayList<>();
-    for (Parkir parkir : parkirRepo.findAll()) {
+    for (Parkir parkir : parkirRepo.findAllOrderByIdAsc()) {
       if (parkir.isAvailable())
         parkirs.add(parkir);
     }

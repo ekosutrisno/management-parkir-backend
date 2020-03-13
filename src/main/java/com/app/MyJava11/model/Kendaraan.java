@@ -1,5 +1,6 @@
 package com.app.MyJava11.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = Kendaraan.TABLE_NAME)
-public class Kendaraan {
+public class Kendaraan implements Serializable {
+	private static final long serialVersionUID = -7749304504162528878L;
+
 	public static final String TABLE_NAME = "kendaraan";
 
 	@Id
