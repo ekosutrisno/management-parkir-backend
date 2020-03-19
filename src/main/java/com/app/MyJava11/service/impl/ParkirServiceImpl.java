@@ -50,4 +50,9 @@ public class ParkirServiceImpl implements ParkirService {
     return parkirRepo.save(parkir);
   }
 
+  @Override
+  public Parkir findByNama(String nama) {
+    return parkirRepo.findByNama(nama);
+  }
+
 }

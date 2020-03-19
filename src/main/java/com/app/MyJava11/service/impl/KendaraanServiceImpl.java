@@ -213,4 +213,9 @@ public class KendaraanServiceImpl implements KendaraanService {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
+  @Override
+  public List<Kendaraan> searchByWarna(String warna) {
+    return kendaraanRepository.findByWarnaCustom("%" + warna + "%");
+  }
+
 }

@@ -11,6 +11,8 @@ public interface ParkirService {
 
   Optional<Parkir> getById(Long id);
 
+  Parkir findByNama(String nama);
+  
   Parkir save(Parkir parkir);
 
   Parkir updateMasuk(Parkir parkir);

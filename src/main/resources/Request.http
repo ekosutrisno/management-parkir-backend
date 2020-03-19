@@ -35,6 +35,9 @@ GET {{kendaraan_url}}/warna?warna={{warna_mobil}} HTTP/1.1
 ### Search Plat nomor by Warna result As Map<String, String[]>
 GET {{kendaraan_url}}/warnaArray?warna={{warna_mobil}} HTTP/1.1
 
+### Search by warna kenadaraan
+GET {{kendaraan_url}}/all-warna?warna=pi HTTP/1.1
+
 ### Get Jumlah Kendaraan By Tipe Kendaraan
 GET {{kendaraan_url}}/jumlahByTipe?tipe={{tipe}} HTTP/1.1
 
@@ -51,6 +54,9 @@ Content-Type: application/json
 
 ### Get All data Parkir yang Available = true
 GET {{parkir_url}}/all HTTP/1.1
+
+### Get All data Parkir yang Available = true
+GET {{parkir_url}}/get-bynama?nama=A7 HTTP/1.1
 
 ### Add Slot Parkir
 POST {{parkir_url}}/add HTTP/1.1
@@ -87,5 +93,7 @@ query{
   getAllKendaraan{
     warna 
     isKeluar
+    platNomor
+    tipe
   }
 }

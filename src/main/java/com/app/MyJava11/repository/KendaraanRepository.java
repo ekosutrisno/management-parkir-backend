@@ -30,6 +30,9 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Long> {
 
   List<Kendaraan> findByWarnaIgnoreCase(String warna);
 
+  @Query(value = "SELECT * FROM kendaraan WHERE is_keluar = false AND UPPER(warna) LIKE UPPER(?)", nativeQuery = true)
+  List<Kendaraan> findByWarnaCustom(String warna);
+
   @Query(value = "SELECT * FROM kendaraan WHERE is_keluar = false AND UPPER(plat_nomor) LIKE UPPER(?)", nativeQuery = true)
   List<Kendaraan> searchByPlat(String platNomor);
 

@@ -136,6 +136,11 @@ public class KendaraanController {
     return kendaraanService.getResponseByWarna(warna);
   }
 
+  @GetMapping("all-warna")
+  public List<Kendaraan> searchByWarnaMobil(@RequestParam("warna") String warna) {
+    return kendaraanService.searchByWarna(warna);
+  }
+
   @GetMapping("warnaArray")
   public ResponseEntity<?> getArrayPlat(@RequestParam("warna") String warna) {
     Map<String, String[]> data = kendaraanService.getResponseByWarnaArray(warna);

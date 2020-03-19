@@ -24,6 +24,8 @@ public interface KendaraanService {
 
   List<PlatNomor> getResponseByWarna(String warna);
 
+  List<Kendaraan> searchByWarna(String warna);
+
   Map<String, String[]> getResponseByWarnaArray(String warna);
 
   ResponseByTipe jumlahKendaraanByTipe(String tipe);
