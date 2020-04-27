@@ -46,10 +46,10 @@ POST {{kendaraan_url}}/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "tipe":"SEDAN",
-    "platNomor":"B 11Z QW",
-    "warna":"Putih",
-    "parkiLot":{"id":12 }
+    "tipe":"MVP",
+    "platNomor":"B XXR QW",
+    "warna":"Pink",
+    "parkiLot":{"id":6 }
 }
 
 ### Get All data Parkir yang Available = true
@@ -63,7 +63,7 @@ POST {{parkir_url}}/add HTTP/1.1
 Content-Type: application/json
 
 {
-  "nama":"A12"
+  "nama":"A101"
 }
 ### Kendaraan Masuk (Add Kendaraan)
 POST {{graphql_url}} HTTP/1.1
