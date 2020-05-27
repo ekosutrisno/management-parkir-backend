@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParkirRepository extends JpaRepository<Parkir, Long> {
 
-  Parkir findByNama(String nama);
+  List<Parkir> findByNama(String nama);
 
   String MY_QUERY = "SELECT * FROM parkir ORDER BY id ASC";
 

@@ -44,7 +44,7 @@ public class ParkirController {
   }
 
   @GetMapping("get-bynama")
-  public Parkir getByNama(@RequestParam("nama") String nama) {
+  public List<Parkir> getByNama(@RequestParam("nama") String nama) {
     return parkirService.findByNama(nama);
   }
 

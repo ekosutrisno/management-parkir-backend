@@ -51,7 +51,7 @@ public class ParkirServiceImpl implements ParkirService {
   }
 
   @Override
-  public Parkir findByNama(String nama) {
+  public List<Parkir> findByNama(String nama) {
     return parkirRepo.findByNama(nama);
   }
 
