@@ -31,120 +31,109 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = "api/kendaraan", produces = "application/json")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class KendaraanController {
 
-  @Autowired
-  private KendaraanService kendaraanService;
+   @Autowired
+   private KendaraanService kendaraanService;
 
-  @Autowired
-  private ParkirService parkirService;
+   @Autowired
+   private ParkirService parkirService;
 
-  @GetMapping("all")
-  public List<Kendaraan> getAllKendaraan() {
-    return kendaraanService.getAll();
-  }
+   @GetMapping("all")
+   public List<Kendaraan> getAllKendaraan() {
+      return kendaraanService.getAll();
+   }
 
-  @GetMapping("response")
-  public List<Response> getAllResponse() {
-    return kendaraanService.getResponse();
-  }
+   @GetMapping("response")
+   public List<Response> getAllResponse() {
+      return kendaraanService.getResponse();
+   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<?> getDataById(@PathVariable("id") Long id) {
-    Optional<Kendaraan> kOptional = kendaraanService.getById(id);
+   @GetMapping("/{id}")
+   public ResponseEntity<?> getDataById(@PathVariable("id") Long id) {
+      Optional<Kendaraan> kOptional = kendaraanService.getById(id);
 
-    CustomResponse pPenuh = new CustomResponse();
-    pPenuh.setStatus("Data dengan id: " + id + " tidak ditemukan.");
+      CustomResponse pPenuh = new CustomResponse();
+      pPenuh.setStatus("Data dengan id: " + id + " tidak ditemukan.");
 
-    List<CustomResponse> data = new ArrayList<>();
-    data.add(pPenuh);
+      List<CustomResponse> data = new ArrayList<>();
+      data.add(pPenuh);
 
-    if (kOptional.isPresent())
-      return new ResponseEntity<>(kOptional.get(), HttpStatus.OK);
-    return new ResponseEntity<>(data, HttpStatus.OK);
-  }
+      if (kOptional.isPresent())
+         return new ResponseEntity<>(kOptional.get(), HttpStatus.OK);
+      return new ResponseEntity<>(data, HttpStatus.OK);
+   }
 
-  @GetMapping("plat")
-  public ResponseEntity<?> getAllResponse(@RequestParam("noPlat") String platNomor) {
-    Optional<Response> dataResponse = kendaraanService.getResponseByPlat(platNomor);
+   @GetMapping("plat")
+   public ResponseEntity<?> getAllResponse(@RequestParam("noPlat") String platNomor) {
+      Optional<Response> dataResponse = kendaraanService.getResponseByPlat(platNomor);
 
-    CustomResponse pPenuh = new CustomResponse();
-    pPenuh.setStatus("Plat " + platNomor + " tidak ditemukan.");
+      CustomResponse pPenuh = new CustomResponse();
+      pPenuh.setStatus("Plat " + platNomor + " tidak ditemukan.");
 
-    List<CustomResponse> data = new ArrayList<>();
-    data.add(pPenuh);
+      List<CustomResponse> data = new ArrayList<>();
+      data.add(pPenuh);
 
-    if (dataResponse.isPresent())
-      return new ResponseEntity<>(dataResponse.get(), HttpStatus.OK);
-    return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+      if (dataResponse.isPresent())
+         return new ResponseEntity<>(dataResponse.get(), HttpStatus.OK);
+      return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
 
-  }
+   }
 
-  @PostMapping(value = "add")
-  public Kendaraan addKendaraan(@RequestBody Kendaraan kendaraan) {
+   @PostMapping(value = "add")
+   public Kendaraan addKendaraan(@RequestBody Kendaraan kendaraan) {
 
-    Parkir parkir = parkirService.getById(kendaraan.getParkiLot().getId()).get();
-    parkirService.updateMasuk(parkir);
+      Parkir parkir = parkirService.getById(kendaraan.getParkiLot().getId()).get();
+      parkirService.updateMasuk(parkir);
 
-    return kendaraanService.save(kendaraan);
-  }
+      return kendaraanService.save(kendaraan);
+   }
 
-  @PostMapping(value = "addResponse")
-  public List<Response> addResponseKendaraan(@RequestBody KendaraanDto kendaraandDto) {
-    Kendaraan kendaraan = kendaraandDto.getKendaraan();
-    kendaraanService.saveKendaraan(kendaraan);
-    return this.getAllResponse();
-  }
+   @PostMapping(value = "addResponse")
+   public List<Response> addResponseKendaraan(@RequestBody KendaraanDto kendaraandDto) {
+      Kendaraan kendaraan = kendaraandDto.getKendaraan();
+      kendaraanService.saveKendaraan(kendaraan);
+      return this.getAllResponse();
+   }
 
-  @GetMapping("search")
-  public ResponseEntity<?> gResponseByPlatNomor(@RequestParam("plat") String plat) {
-    List<Kendaraan> platNomor = kendaraanService.SearchByPlatNomor(plat);
+   @GetMapping("search")
+   public List<Kendaraan> gResponseByPlatNomor(@RequestParam("plat") String plat) {
+      return kendaraanService.SearchByPlatNomor(plat);
+   }
 
-    CustomResponse pPenuh = new CustomResponse();
-    pPenuh.setStatus("Plat " + plat + " tidak ditemukan.");
+   @GetMapping("keluar")
+   public ResponseEntity<?> kendaraanKeluar(@RequestParam("platNomor") String platNomor) {
+      Map<String, Object> result = new HashMap<>();
+      ResponseByPlatNomor data = kendaraanService.keluar(platNomor);
+      result.put("result", data);
+      return new ResponseEntity<>(result, HttpStatus.OK);
+   }
 
-    List<CustomResponse> data = new ArrayList<>();
-    data.add(pPenuh);
+   @GetMapping("status")
+   public ResponseEntity<?> kendaraanKeluarStatus(@RequestParam("platNomor") String platNomor) {
+      return kendaraanService.keluarStatus(platNomor);
+   }
 
-    if (platNomor.size() > 0)
-      return new ResponseEntity<>(platNomor, HttpStatus.OK);
-    return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
-  }
+   @GetMapping("jumlahByTipe")
+   public ResponseByTipe jumlahKendaraanByTipe(@RequestParam("tipe") String tipe) {
+      return kendaraanService.jumlahKendaraanByTipe(tipe);
+   }
 
-  @GetMapping("keluar")
-  public ResponseEntity<?> kendaraanKeluar(@RequestParam("platNomor") String platNomor) {
+   @GetMapping("warna")
+   public List<PlatNomor> getPlatByWarnaMobil(@RequestParam("warna") String warna) {
+      return kendaraanService.getResponseByWarna(warna);
+   }
 
-    Map<String, Object> result = new HashMap<>();
-    ResponseByPlatNomor data = kendaraanService.keluar(platNomor);
-    result.put("result", data);
-    return new ResponseEntity<>(result, HttpStatus.OK);
-  }
+   @GetMapping("all-warna")
+   public List<Kendaraan> searchByWarnaMobil(@RequestParam("warna") String warna) {
+      return kendaraanService.searchByWarna(warna);
+   }
 
-  @GetMapping("status")
-  public ResponseEntity<?> kendaraanKeluarStatus(@RequestParam("platNomor") String platNomor) {
-    return kendaraanService.keluarStatus(platNomor);
-  }
-
-  @GetMapping("jumlahByTipe")
-  public ResponseByTipe jumlahKendaraanByTipe(@RequestParam("tipe") String tipe) {
-    return kendaraanService.jumlahKendaraanByTipe(tipe);
-  }
-
-  @GetMapping("warna")
-  public List<PlatNomor> getPlatByWarnaMobil(@RequestParam("warna") String warna) {
-    return kendaraanService.getResponseByWarna(warna);
-  }
-
-  @GetMapping("all-warna")
-  public List<Kendaraan> searchByWarnaMobil(@RequestParam("warna") String warna) {
-    return kendaraanService.searchByWarna(warna);
-  }
-
-  @GetMapping("warnaArray")
-  public ResponseEntity<?> getArrayPlat(@RequestParam("warna") String warna) {
-    Map<String, String[]> data = kendaraanService.getResponseByWarnaArray(warna);
-    return new ResponseEntity<>(data, HttpStatus.OK);
-  }
+   @GetMapping("warnaArray")
+   public ResponseEntity<?> getArrayPlat(@RequestParam("warna") String warna) {
+      Map<String, String[]> data = kendaraanService.getResponseByWarnaArray(warna);
+      return new ResponseEntity<>(data, HttpStatus.OK);
+   }
 
 }
